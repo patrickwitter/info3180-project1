@@ -1,12 +1,9 @@
-"""
-Flask Documentation:     https://flask.palletsprojects.com/
-Jinja2 Documentation:    https://jinja.palletsprojects.com/
-Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
-This file contains the routes for your application.
-"""
-
-from app import app
-from flask import render_template, request, redirect, url_for
+import os
+from app import app, db
+from flask import render_template, request, redirect, url_for, flash, send_from_directory
+from app.forms import Property_Form
+from app.models import Property
+from werkzeug.utils import secure_filename
 
 
 ###
@@ -22,7 +19,43 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Project 1")
+
+
+@app.route('/properties/create', methods=['GET', 'POST'])
+def new_property():
+    """Add a new property to database"""
+    property_form = Property_Form()
+    if property_form.validate_on_submit():
+        title = property_form.title.data
+        prop_type = property_form.property_type.data
+        location = property_form.location.data
+        price = property_form.price.data
+        description = property_form.description.data
+        bedrooms = property_form.bedrooms.data
+        bathrooms = property_form.bathrooms.data
+        photo = property_form.photo.data
+        photo_filename = secure_filename(photo.filename)
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photo_filename))
+        new_property = Property(title, prop_type, location, price, description, bedrooms, bathrooms, photo_filename)
+        db.session.add(new_property)
+        db.session.commit()
+        flash("New property successfully added", "success")
+        return redirect(url_for('view_properties'))
+    return render_template("new_property.html", form=property_form)
+
+
+@app.route('/properties')
+def view_properties():
+    """Show all properties"""
+    properties = db.session.execute(db.select(Property)).scalars()
+    return render_template("properties.html", properties=properties)
+
+
+@app.route('/properties/<propertyid>')
+def show_property_info(propertyid):
+    property = db.session.execute(db.select(Property).filter_by(id=propertyid)).scalar()
+    return render_template("property.html", property=property)
 
 
 ###
@@ -61,3 +94,9 @@ def add_header(response):
 def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
+
+
+@app.route('/properties/<propertyid>/photo')
+def get_property_image(propertyid):
+    property = db.session.execute(db.select(Property).filter_by(id=propertyid)).scalar()
+    return send_from_directory(os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']), property.photo_filename)

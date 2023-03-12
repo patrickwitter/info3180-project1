@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% include 'flash_messages.html' %}
+    <h1>Properties</h1>
+    <div class="flex-container">
+        {% for property in properties %}
+        <div class="card card-custom">
+            <img class="card-img-top" src="{{ url_for('get_property_image', propertyid=property.id) }}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title property-title">{{ property.title }}</h4>
+              <div class="location-group">
+                <img src="{{ url_for('static', filename='icons/location.png')}}" class="icon"/>
+                <div>{{ property.location }}</div>
+            </div>
+              <p class="card-text property-price">${{ property.price }}</p>
+              <div class="view-property-link">
+                <a href="{{ url_for('show_property_info', propertyid=property.id) }}">View Property</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+{% endblock %}

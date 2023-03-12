@@ -1,3 +1,187 @@
 body {
     padding-top: 5rem;
+    background-color: #f3f4f6;
+}
+
+.navbar.navbar-expand-lg.fixed-top {
+    background-color: #14b7a6;
+    color: white;
+}
+
+.nav-link, .navbar-brand {
+    color: white;
+}
+
+.field-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+    width: 500px;
+    border-style:ridge;
+}
+
+input[name="title"] {
+    width: 500px;
+    border-style:ridge;
+}
+
+input[name="location"], input[name="bedrooms"], input[name="bathrooms"], input[name="price"] {
+    width: 200px;
+    border-style:ridge;
+}
+
+input, textarea {
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.form-container {
+    border: white solid 1px;
+    width: 600px;
+    padding: 30px 50px 20px 30px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.form-container button {
+    background-color: #3475e3;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    border: none;
+}
+
+label {
+    font-weight: bold;
+}
+
+div.flex-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+}
+
+div.flex-item {
+    display: flex;
+    flex-direction: column;
+    border: black solid 1px;
+    width: 200px;
+}
+
+.view-property-link {
+    width: 100%;
+    border: none;
+    background-color: #14b7a6;
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+}
+
+.email-realtor {
+    border: none;
+    background-color: #14b7a6;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 16px;
+}
+
+div.view-property-link a {
+    color: white;
+    text-decoration: none;
+}
+
+div.property-photo img {
+    width: 200px;
+    height: 150px;
+}
+
+.location-group, .bedroom-bathroom-group, .price-type-group {
+    display: flex;
+    flex-direction: row;
+    margin-left: 16px;
+    column-gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.price-type-group #price, .price-type-group #type {
+    padding: 5px; border-radius: 20px; color: white;
+}
+
+.price-type-group #price {
+    background-color: #5d9ff5;
+}
+
+.price-type-group #type {
+    background-color: #fbbf23;
+}
+
+.card-body {
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.property-title {
+    margin-left: 16px;
+}
+
+.details {
+    padding-left: 30px;
+}
+
+.individual-property-card {
+    max-width: 800px;
+}
+
+.individual-property-card-container {
+    display:flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin: auto;
+}
+
+p.card-text.property-price {
+    background-color: #5d9ff5; 
+    padding: 5px; 
+    border-radius: 20px; 
+    color: white;
+    width: 100px;
+    margin-left: 16px;
+    text-align: center;
+}
+
+p.card-text.property-description {
+    margin-left: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.icon {
+    height: 20px;
+}
+
+.bedroom-bathroom-group .icon {
+        padding-right: 10px;
+}
+
+.card-custom {
+    max-width: 300px;
 }

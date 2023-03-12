@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="individual-property-card-container">
+<div class="card individual-property-card">
+    <div class="row g-0">
+        <div class="col-sm-5">
+            <img src="{{ url_for('get_property_image', propertyid=property.id) }}" class="card-img-top h-100" alt="...">
+        </div>
+        <div class="col-sm-7 details">
+            <div class="card-body">
+                <h5 class="card-title property-title">{{ property.title }}</h5>
+                <div class="price-type-group">
+                    <div id="price">${{ property.price }}</div>
+                    <div id="type">{{ property.property_type }}</div>
+                </div>
+                <p class="card-text property-description">{{ property.description }}</p>
+                <div class="bedroom-bathroom-group">
+                    <div>
+                        <span><img src="{{ url_for('static', filename='icons/bed.png')}}" class="icon"/></span>{{ property.bedrooms }} Bedrooms
+                    </div>
+                    <div>
+                        <span><img src="{{ url_for('static', filename='icons/bath.png')}}" class="icon"/></span>{{ property.bathrooms }} Bathrooms
+                    </div>
+                </div>
+                <div class="location-group">
+                    <img src="{{ url_for('static', filename='icons/location.png')}}" class="icon"/>
+                    <div>{{ property.location }}</div>
+                </div>
+                <a href="#" class="btn btn-primary email-realtor">Email Realtor</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
